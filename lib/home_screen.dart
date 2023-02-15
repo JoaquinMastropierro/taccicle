@@ -7,14 +7,37 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {}, backgroundColor: Color.fromARGB(255, 11, 4, 69),
+      ), 
+
       appBar: AppBar(
           title: const Text( 'taccicle' ),
         ),
+
+        body: PageView(
+          //physics: NeverScrollableScrollPhysics(),
+          children: [
+            Container(
+              color: Colors.amber,
+              child: Center(
+                child: Text('Custom Screen'),
+              ),
+            ),
+            Container(
+              color: Colors.black45,
+              child: Center(
+                child: Text('Custom Screen'),
+              ),
+            )
+          ],
+        ),
+
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.yellow,
+          backgroundColor: Color.fromARGB(255, 11, 4, 69),
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white.withOpacity(0.5),
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.abc),
               label: 'principal',

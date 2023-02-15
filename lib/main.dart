@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: HomeScreen()
     );
-  }   //CREO QUE PARA PONER EL ICONO DE ANDA EN BICI HAY QUE USAR UN Stack QUE HACE QUE FLOTE UN WIDGET
+  }   
 }
