@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:taccicle/main_panel.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int currentPage = 0;
+  final PageController pageController = new PageController( initialPage: 0);
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       floatingActionButton: FloatingActionButton(
         onPressed: () => {}, backgroundColor: Color.fromARGB(255, 11, 4, 69),
       ), 
@@ -17,23 +27,42 @@ class HomeScreen extends StatelessWidget {
 
         body: PageView(
           //physics: NeverScrollableScrollPhysics(),
+          controller: pageController,
+          onPageChanged: (index) {
+            currentPage = index;
+            setState(() {});
+          },
           children: [
-            Container(
-              color: Colors.amber,
-              child: Center(
-                child: Text('Custom Screen'),
-              ),
-            ),
+            main_panel(),
             Container(
               color: Colors.black45,
               child: Center(
                 child: Text('Custom Screen'),
               ),
-            )
+            ),
+            Container(
+              color: Colors.red,
+              child: Center(
+                child: Text('Custom Screen2'),
+              ),
+            ),
           ],
         ),
 
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentPage,
+          onTap: (index){
+            currentPage = index;
+
+            pageController.animateToPage(
+              index, 
+              duration: Duration(minutes: 1), 
+              curve: Curves.linear
+            );
+
+            setState(() {});
+          },
+
           backgroundColor: Color.fromARGB(255, 11, 4, 69),
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white.withOpacity(0.5),
