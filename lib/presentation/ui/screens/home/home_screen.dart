@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:taccicle/main_panel.dart';
+import 'package:taccicle/presentation/ui/screens/home/history/history_list_screen.dart';
+import 'package:taccicle/presentation/ui/screens/home/home_drawer.dart';
+import 'package:taccicle/presentation/ui/screens/home/main/main_panel.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -15,14 +15,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
  @override
   Widget build(BuildContext context) {
+
+    var theme = Theme.of(context);
+    var colorScheme = theme.colorScheme;
+
     return Scaffold(
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {}, backgroundColor: Color.fromARGB(255, 11, 4, 69),
+        onPressed: () => {}, backgroundColor: Theme.of(context).primaryColor,
+
       ), 
+      drawer: HomeDrawer(),
 
       appBar: AppBar(
           title: const Text( 'taccicle' ),
+          backgroundColor: colorScheme.primary,
         ),
 
         body: PageView(
@@ -33,13 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {});
           },
           children: [
-            main_panel(),
-            Container(
-              color: Colors.black45,
-              child: Center(
-                child: Text('Custom Screen'),
-              ),
-            ),
+            MainPanel(),
+            HistoryListScreen(),
             Container(
               color: Colors.red,
               child: Center(
@@ -56,27 +58,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
             pageController.animateToPage(
               index, 
-              duration: Duration(minutes: 1), 
-              curve: Curves.linear
+              duration: Duration(milliseconds: 200), 
+              curve: Curves.easeOutCubic
             );
 
             setState(() {});
           },
 
-          backgroundColor: Color.fromARGB(255, 11, 4, 69),
+          backgroundColor: Theme.of(context).colorScheme.primary,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white.withOpacity(0.5),
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.abc),
+              icon: Icon(Icons.query_stats),
               label: 'principal',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.abc),
+              icon: Icon(Icons.history),
               label: 'historial',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.abc),
+              icon: Icon(Icons.wine_bar),
               label: 'cositas',
             ),
           ],
@@ -84,6 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
     ); 
   }
 }
+
+
 
 // Scaffold(
 //         appBar: AppBar(
