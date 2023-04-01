@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       primaryColor:const Color.fromARGB(255, 59, 131, 190),
-      shadowColor: Color.fromARGB(255, 161, 161, 161),
+      shadowColor: Color.fromARGB(255, 189, 189, 189),
       canvasColor: Colors.white,
       colorScheme: const ColorScheme(brightness: Brightness.light, primary: Color.fromARGB(255, 59, 131, 190), onPrimary: Colors.white, secondary: Colors.pinkAccent, onSecondary: Colors.pinkAccent, error: Color.fromARGB(255, 255, 71, 71), onError: Colors.white, background: Colors.white, onBackground: Color.fromARGB(255, 207, 200, 200), surface: Color.fromARGB(255, 255, 255, 255), onSurface: Color.fromARGB(255, 56, 56, 56))      
 

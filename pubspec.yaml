@@ -39,6 +39,8 @@ dependencies:
   syncfusion_flutter_charts: ^21.1.35
   crypto: ^3.0.2
   blur: ^3.0.0
+  fa_stepper: ^0.0.2
+  file_picker: ^5.2.6
 dev_dependencies:
   flutter_test:
     sdk: flutter

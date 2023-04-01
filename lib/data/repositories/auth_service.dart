@@ -31,12 +31,18 @@ class AuthService {
 
   }
 
-  static Future<User?> register(String username, String password) async {
+  static Future<User?> register(String username, String password, Map img) async {
     try {
-
-      final response = await BackendApi.httpPost('/auth/register', {'username': username, 'password': password});
-
+      
+      
+      final response = await BackendApi.httpPost('/auth/register', {'username': username, 'password': password, "avatar":img.containsKey('folder') ? img['folder'] : null });
+      
       final authResp = AuthResponses.fromJson(response);
+
+      if(!img.containsKey('folder')){
+        final response = await BackendApi.uploadFile("/user/uploadAvatar/${authResp.user.idUser}",img['bytes']);
+        authResp.user.avatar = response['avatar'];
+      }
 
       await Storage.prefs.setString(Storage.TOKEN, authResp.token);
       

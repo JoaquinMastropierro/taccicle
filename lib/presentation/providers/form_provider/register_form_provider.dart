@@ -13,6 +13,8 @@ class RegisterFormProvider extends ChangeNotifier {
   String? email = '';
   String? password = '';
   String? repeatedPassword = '';
+  bool pickedImage = false;
+  Map? img;
 
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
@@ -20,24 +22,40 @@ class RegisterFormProvider extends ChangeNotifier {
 
   Future<bool> validateForm() async {
     
-    if(!formkey.currentState!.validate()) return false;
     
-    try{
+    
 
+      if(!formkey.currentState!.validate()) return false;
 
-      User? user = await authUserCases.register(email!, password!);
-      
-      _authProvider.setUser(user!);
-
-      return true;
+  
      
-
-    } on ExistentUser catch(e){      
-        ToastService.error(e.getMessage());
-        return false;
-    }
-
+      return true;
+  
 
   }
 
+  void setPickedImg(Map? img){
+    this.pickedImage = img != null;
+    this.img = img;
+    notifyListeners();
+  }
+
+  Future register() async{
+      
+      try{
+        User? user = await authUserCases.register(email!, password!, img!);
+      
+        _authProvider.setUser(user!);
+
+        return true; 
+      } on ExistentUser catch(e){      
+        ToastService.error(e.getMessage());
+        return false;
+      } catch(e) {
+        print(e);
+        ToastService.error("Hubo un error");
+        return false;
+      }
+  
+  }
 }

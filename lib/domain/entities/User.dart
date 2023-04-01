@@ -1,23 +1,27 @@
 class User {
+
     User({
         required this.idUser,
-        required this.name,
+        required this.username,
         this.email,
+        required this.avatar
     });
 
     int idUser;
-    String name;
-    dynamic email;
+    String username;
+    String? email;
+    String? avatar;
 
     factory User.fromJson(Map<String, dynamic> json) => User(
         idUser: json["idUser"],
-        name: json["name"],
+        username: json["username"],
         email: json["email"],
+        avatar: json["avatar"],
     );
 
     Map<String, dynamic> toJson() => {
         "idUser": idUser,
-        "name": name,
+        "username": username,
         "email": email,
     };
 

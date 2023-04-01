@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taccicle/presentation/ui/screens/friends/friends_list.dart';
 import 'package:taccicle/presentation/ui/screens/home/history/history_list_screen.dart';
 import 'package:taccicle/presentation/ui/screens/home/home_drawer.dart';
 import 'package:taccicle/presentation/ui/screens/home/main/main_panel.dart';
@@ -42,12 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             MainPanel(),
             HistoryListScreen(),
-            Container(
-              color: Colors.red,
-              child: Center(
-                child: Text('Custom Screen2'),
-              ),
-            ),
+            FriendsList()
           ],
         ),
 
@@ -71,15 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.query_stats),
-              label: 'principal',
+              label: 'Principal',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              label: 'historial',
+              label: 'Historial',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.wine_bar),
-              label: 'cositas',
+              icon: Icon(Icons.person),
+              label: 'Amigos',
             ),
           ],
         ),

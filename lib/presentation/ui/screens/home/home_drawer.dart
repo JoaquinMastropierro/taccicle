@@ -27,18 +27,21 @@ class HomeDrawer extends StatelessWidget {
       child: Column(
         children: [
           DrawerHeader(
-            padding:const EdgeInsets.all(0),
+            padding: EdgeInsets.zero,
             child: Stack(
               children: [
-                const Positioned.fill(
-                        child: Image(
-                            image: AssetImage("lib/assets/images/juaco.png"),
-                            fit: BoxFit.fill))
-                    .blurred(blur: 3, colorOpacity: 0),
+                 Positioned.fill(
+                        child: Image.network(
+                            loggedUser.avatar!,
+                            fit: BoxFit.fill,
+                            loadingBuilder: (context, child, loadingProgress) => loadingBuilder(context, child, loadingProgress),
+                            
+                            ))
+                    .blurred(blur: 5, colorOpacity: 0),
                 Positioned(
                   bottom: 15,
                   right: 40,
-                  child: Text(loggedUser.name,
+                  child: Text(loggedUser.username,
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -64,6 +67,15 @@ class HomeDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+   loadingBuilder(context, child, ImageChunkEvent? loadingProgress) {
+
+    if(loadingProgress == null) return child;
+    
+    return Center(
+            child:  CircularProgressIndicator(),
+            );
   }
 
   OutlinedButton outlinedButton(

@@ -16,10 +16,10 @@ class authUserCases {
 
     }
 
-    static Future<User?> register(String username, String password) async {
+    static Future<User?> register(String username, String password, Map img) async {
 
 
-      User? user = await  AuthService.register(username, _encodePassword(password));
+      User? user = await  AuthService.register(username, _encodePassword(password), img);
 
       return user;
     }

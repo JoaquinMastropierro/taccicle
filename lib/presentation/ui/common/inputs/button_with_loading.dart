@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 class ButtonWithLoading extends StatefulWidget {
   const ButtonWithLoading({
     super.key,
-    required this.onPress, this.height, required this.buttonContent,
+    required this.onPress, this.height, required this.buttonContent, this.isDisabled = false
   });
 
   final Future Function() onPress;
   final double? height;
   final Widget buttonContent; 
+  final bool isDisabled;
 
   @override
   State<ButtonWithLoading> createState() => _ButtonWithLoadingState();
@@ -18,9 +19,23 @@ class ButtonWithLoading extends StatefulWidget {
 class _ButtonWithLoadingState extends State<ButtonWithLoading> {
 
   bool isLoading = false;
+  bool isDisabled = false;
+
+  @override
+  void initState() {
+
+   
+
+    super.initState();
+   
+  }
 
   @override
   Widget build(BuildContext context) {
+     setState(() {
+      isDisabled = widget.isDisabled;
+    });
+    
     return TextButton(
 
         style: TextButton.styleFrom(
@@ -28,12 +43,12 @@ class _ButtonWithLoadingState extends State<ButtonWithLoading> {
             foregroundColor: Colors.white,
             disabledBackgroundColor: Colors.grey.withOpacity(0.7)
         ),
-        onPressed: isLoading ? null : () async { 
+        onPressed: (isDisabled || isLoading) ? null : () async { 
           setState(() {
             isLoading = true;
           });
-
-          await widget.onPress();
+          
+           await widget.onPress();
 
            setState(() {
             isLoading = false;

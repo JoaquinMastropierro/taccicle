@@ -4,16 +4,18 @@ import 'package:taccicle/domain/entities/User.dart';
 import 'package:taccicle/presentation/providers/auth_provider.dart';
 import 'package:taccicle/presentation/providers/form_provider/register_form_provider.dart';
 import 'package:taccicle/presentation/ui/common/inputs/button_with_loading.dart';
+import 'package:taccicle/presentation/ui/common/inputs/cancel_button.dart';
 import 'package:taccicle/presentation/ui/common/inputs/custom_shadow_input.dart';
+import 'package:taccicle/presentation/ui/screens/home/home_screen.dart';
+import 'package:taccicle/presentation/ui/screens/register/register_firststep.dart';
+import 'package:taccicle/presentation/ui/screens/register/register_secondstep.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final colorScheme = Theme.of(context).colorScheme;
-
 
     return ChangeNotifierProvider(
       create: (_) => RegisterFormProvider(Provider.of<AuthProvider>(context)),
@@ -28,18 +30,21 @@ class RegisterPage extends StatelessWidget {
   }
 }
 
-class RegisterView extends StatelessWidget {
+class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  int currentStep = 0;
 
   @override
   Widget build(BuildContext context) {
-    final registerFormProvider = Provider.of<RegisterFormProvider>(context, listen: false);
+    final registerFormProvider =
+        Provider.of<RegisterFormProvider>(context);
     final colorScheme = Theme.of(context).colorScheme;
-        
-  String? repeatedPassword(String? value) {
-    return (value ?? '') == registerFormProvider.password ? null : "La clave debe ser igual";
-  }
 
     var header = Container(
       decoration: BoxDecoration(
@@ -71,75 +76,101 @@ class RegisterView extends StatelessWidget {
       ),
     );
 
-   
-
     Future onPressButton() async {
-
-         await registerFormProvider.validateForm().then((valid) => {if(valid) Navigator.pop(context)});
-
+      final validForm = await registerFormProvider.validateForm();
     }
-    var textButton = ButtonWithLoading(onPress: onPressButton, height: 45, buttonContent: buttonContent());
 
     return Column(children: [
       header,
-      Form(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        key: registerFormProvider.formkey,
-        child: Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                CustomShadowedInput(
-                  hintText: "Nombre de Usuario",
-                  validation: User.validateUsername,
-                  onChange: (p0) => registerFormProvider.email = p0,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                CustomShadowedInput(
-                  hintText: "Contraseña",
-                  validation: validate8length,
-                  onChange: (p0) => registerFormProvider.password = p0,
-                  obscureText: true,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomShadowedInput(
-                  hintText: "Repetir contraseña",
-                  validation: repeatedPassword,
-                  onChange: (p0) => registerFormProvider.repeatedPassword = p0,
-                  obscureText: true,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: textButton,
-                )
-                
-              ],
-            ),
-          ),
-        ),
-      )
+      Expanded(child: buildStepper(registerFormProvider))
     ]);
+  }
+
+  Stepper buildStepper(RegisterFormProvider registerFormProvider) {
+    return Stepper(
+        type: StepperType.horizontal,
+        currentStep: currentStep,
+        onStepContinue: incrementStep,
+        onStepCancel: decrementStep,
+        controlsBuilder: (context, details) {
+          if (details.currentStep == 0) {
+            return buildContinueButton(() async {
+              final validForm = await registerFormProvider.validateForm();
+
+              if (validForm) details.onStepContinue!();
+            }, "Continuar");
+          }
+
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: 100,
+                child: CancelButton(
+                  content: Text(
+                    "Volver",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      currentStep = 0;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(
+                width: 100,
+                child: buildContinueButton(handleRegisterButton, "Registrarse", disabled: !registerFormProvider.pickedImage),
+              ),
+            ],
+          );
+        },
+        steps: [
+          Step(
+              title: Text("Datos Basicos"),
+              content: RegisterFirstStep(),
+              isActive: currentStep >= 0),
+          Step(
+              title: Text("Avatar"),
+              content: RegisterSecondStep(),
+              isActive: currentStep >= 1)
+        ]);
+  }
+
+  Future handleRegisterButton() async {
+
+    final registerFormProvider = Provider.of<RegisterFormProvider>(context, listen: false);
     
+    await registerFormProvider.register().then((value) {
+        if(value) {
+          Navigator.pop(context);
+        }
+    });
+
   }
 
-  Text buttonContent() {
-    return const Text(
-          "Registrarse",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        );
+  ButtonWithLoading buildContinueButton(Future<dynamic> onPressButton(), String text, {bool disabled = false}) {
+    
+    return ButtonWithLoading( onPress: onPressButton, height: 45, buttonContent: buttonContent(text), isDisabled: disabled,);
   }
 
-  String? validate8length(String? value) {
-    return (value?.length ?? 0) >= 8 ? null : "Minimo 8 caracteres";
+  void decrementStep() {
+    setState(() {
+      if (currentStep == 1) currentStep--;
+    });
   }
 
+  void incrementStep() {
+    setState(() {
+      if (currentStep == 0) currentStep++;
+    });
+  }
+
+  Text buttonContent(String text) {
+    return Text(
+      text,
+      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+    );
+  }
 }

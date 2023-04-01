@@ -16,7 +16,7 @@ class MainPanel extends StatelessWidget {
     return BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               boxShadow: [
-                BoxShadow(color: theme.shadowColor, blurRadius: 1, spreadRadius: 1)
+                BoxShadow(color: theme.shadowColor, blurRadius: 2, spreadRadius: 1)
               ],
               color: colorScheme.surface
 
@@ -66,10 +66,9 @@ class MainPanel extends StatelessWidget {
 
 
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       child: ListView(
         children: [
-          const SizedBox( height:  25),
           firtRow(),
           const SizedBox( height:  15,),
           secondRow(),
