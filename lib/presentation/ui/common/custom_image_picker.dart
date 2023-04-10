@@ -91,8 +91,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
 
   void onPressUpload() async {
       
-      print("object");
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
+      var result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['jpg','jpeg', 'png'],
         allowMultiple: true,
@@ -105,10 +104,11 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
 
       var newImage  = {
           "bytes":file.bytes!,
-          "id":images.length-1,
+          "id":images.length,
           "picked":true,
           "custom":true
-        };
+      };
+
       setState(() { 
         
         images = images.map((e) {
@@ -156,7 +156,6 @@ class ImagePickerCard extends StatelessWidget {
             image:DecorationImage(image: generateImage(), fit: BoxFit.fill)
              
           ),
-          height: 30,
           width: 180,
           child: pickedIndicator()
         ),
@@ -183,12 +182,8 @@ class ImagePickerCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Container(
-              height: 30,
-              width: 30,
-
-              child: Icon(img['picked'] ? Icons.check_box : Icons.check_box_outline_blank, color: img['picked'] ? Colors.blue : Colors.grey),
-            )
+            Icon(img['picked'] ? Icons.check_box : Icons.check_box_outline_blank, color: img['picked'] ? Colors.blue : Colors.grey),
+            
           ],
         ),
       );

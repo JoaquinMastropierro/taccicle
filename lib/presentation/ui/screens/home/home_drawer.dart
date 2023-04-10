@@ -6,7 +6,6 @@ import 'package:taccicle/domain/user_cases/auth_user_cases.dart';
 import 'package:taccicle/presentation/providers/auth_provider.dart';
 
 class HomeDrawer extends StatelessWidget {
-  
   const HomeDrawer({
     super.key,
   });
@@ -30,14 +29,13 @@ class HomeDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             child: Stack(
               children: [
-                 Positioned.fill(
-                        child: Image.network(
-                            loggedUser.avatar!,
-                            fit: BoxFit.fill,
-                            loadingBuilder: (context, child, loadingProgress) => loadingBuilder(context, child, loadingProgress),
-                            
-                            ))
-                    .blurred(blur: 5, colorOpacity: 0),
+                Positioned.fill(
+                    child: Image.network(
+                  loggedUser.avatar!,
+                  fit: BoxFit.fill,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      loadingBuilder(context, child, loadingProgress),
+                )).blurred(blur: 5, colorOpacity: 0),
                 Positioned(
                   bottom: 15,
                   right: 40,
@@ -46,6 +44,19 @@ class HomeDrawer extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.w600)),
+                ),
+                Positioned(
+                  bottom: 15,
+                  left: 10,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.deepOrange,
+                    radius: 25,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      backgroundImage: NetworkImage(loggedUser.avatar!),
+                      radius: 23,
+                    ),
+                  ),
                 )
               ],
             ),
@@ -59,7 +70,7 @@ class HomeDrawer extends StatelessWidget {
                   children: [
                     outlinedButton(authProvider, "Configuracion", () {}),
                     outlinedButton(authProvider, ":D", () {}),
-                    Spacer(),
+                    const Spacer(),
                     outlinedButton(authProvider, "Salir", logout)
                   ],
                 ),
@@ -69,13 +80,12 @@ class HomeDrawer extends StatelessWidget {
     );
   }
 
-   loadingBuilder(context, child, ImageChunkEvent? loadingProgress) {
+  loadingBuilder(context, child, ImageChunkEvent? loadingProgress) {
+    if (loadingProgress == null) return child;
 
-    if(loadingProgress == null) return child;
-    
     return Center(
-            child:  CircularProgressIndicator(),
-            );
+      child: CircularProgressIndicator(),
+    );
   }
 
   OutlinedButton outlinedButton(

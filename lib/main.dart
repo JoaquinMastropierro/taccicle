@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:taccicle/data/datasource/backend_api.dart';
 import 'package:taccicle/data/datasource/storage.dart';
 import 'package:taccicle/presentation/providers/auth_provider.dart';
+import 'package:taccicle/presentation/providers/location_provider.dart';
 import 'package:taccicle/presentation/services/toast_service.dart';
 import 'package:taccicle/presentation/ui/screens/login/login_screen.dart';
 import 'package:taccicle/presentation/ui/screens/splash/splash_screen.dart';
@@ -28,9 +29,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return MultiProvider(
       
-      create: (BuildContext context) => AuthProvider(),
+      providers: [
+        ChangeNotifierProvider(create: (BuildContext context) => AuthProvider()),
+        ChangeNotifierProvider(create: (BuildContext context) => LocationProvider(), lazy: false,)
+      ],
       child: MainApp()
       
       );

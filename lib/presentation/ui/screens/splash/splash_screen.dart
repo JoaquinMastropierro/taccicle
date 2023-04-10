@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:taccicle/presentation/providers/auth_provider.dart';
 import 'package:taccicle/presentation/ui/screens/login/login_screen.dart';
 import 'package:taccicle/presentation/ui/screens/home/home_screen.dart';
+import 'package:taccicle/presentation/ui/screens/ride_live/ride_live.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
