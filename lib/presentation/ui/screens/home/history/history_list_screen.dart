@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
-import 'package:taccicle/domain/entities/Salida.dart';
+import 'package:taccicle/domain/entities/HistoryRideItem.dart';
 
 class HistoryListScreen extends StatelessWidget {
   HistoryListScreen({super.key});
 
   final test = [
-     Salida("32", "3 Horas 2 minutos", DateTime.now(), 3, "Jerepepe",const Color.fromARGB(255, 107, 1, 255), Colors.white.withOpacity(0.90)),
-     Salida("12", "1 Horas 12 minutos", DateTime(2023, 4, 15, 15, 1, 22), 1, "Jere", Color.fromARGB(255, 180, 96, 96), Colors.white.withOpacity(0.90)),
-     Salida("15", "1 Horas 33 minutos", DateTime(2023, 3, 15, 15, 2, 22), 1, "Jere", const Color(0xF5F3C100), Colors.black54),
-     Salida("32", "3 Horas 2 minutos", DateTime(2023, 2, 13, 15, 3, 22), 3, "Jerepepe",const Color.fromARGB(255, 107, 1, 255), Colors.white.withOpacity(0.90)),
-     Salida("12", "1 Horas 12 minutos", DateTime(2023, 2, 13, 15, 4, 22), 1, "Jere", const Color.fromARGB(255, 39, 225, 194), Colors.black54),
-     Salida("15", "1 Horas 33 minutos", DateTime(2023, 1, 11, 15, 5, 22), 1, "Jere", const Color.fromARGB(255, 25, 54, 109), Colors.white.withOpacity(0.90)),
+     HistoryRideItem("32", "3 Horas 2 minutos", DateTime.now(), 3, "Jerepepe",const Color.fromARGB(255, 107, 1, 255), Colors.white.withOpacity(0.90)),
+     HistoryRideItem("12", "1 Horas 12 minutos", DateTime(2023, 4, 15, 15, 1, 22), 1, "Jere", Color.fromARGB(255, 180, 96, 96), Colors.white.withOpacity(0.90)),
+     HistoryRideItem("15", "1 Horas 33 minutos", DateTime(2023, 3, 15, 15, 2, 22), 1, "Jere", const Color(0xF5F3C100), Colors.black54),
+     HistoryRideItem("32", "3 Horas 2 minutos", DateTime(2023, 2, 13, 15, 3, 22), 3, "Jerepepe",const Color.fromARGB(255, 107, 1, 255), Colors.white.withOpacity(0.90)),
+     HistoryRideItem("12", "1 Horas 12 minutos", DateTime(2023, 2, 13, 15, 4, 22), 1, "Jere", const Color.fromARGB(255, 39, 225, 194), Colors.black54),
+     HistoryRideItem("15", "1 Horas 33 minutos", DateTime(2023, 1, 11, 15, 5, 22), 1, "Jere", const Color.fromARGB(255, 25, 54, 109), Colors.white.withOpacity(0.90)),
   ];
 
   final Days = [
@@ -48,7 +48,7 @@ class HistoryListScreen extends StatelessWidget {
     var theme = Theme.of(context);
     var colorScheme = theme.colorScheme;
 
-    BoxDecoration cardDecoration(Salida salida) {
+    BoxDecoration cardDecoration(HistoryRideItem salida) {
       return  BoxDecoration(
           //color: salida.colorSalida,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -69,7 +69,7 @@ class HistoryListScreen extends StatelessWidget {
           ]);
     }
 
-    InkWell historyCard(Salida salida) {
+    InkWell historyCard(HistoryRideItem salida) {
       String hora = DateFormat("hh:mm").format(salida.HoraInicio);
 
       return InkWell(
@@ -107,7 +107,7 @@ class HistoryListScreen extends StatelessWidget {
         
         // this condition means that the day has changed, so we put a Divider with de Date
         if(lastDate == null || DateFormat('MM-dd-yy').parse(lastDate.toString()) != currentIterationDate){
-
+          
           var cardsOnCurrentDay = test.where((e)=> (DateFormat('MM-dd-yy').parse(e.HoraInicio.toString()) == currentIterationDate)).toList();
           
           
@@ -128,9 +128,14 @@ class HistoryListScreen extends StatelessWidget {
       },
       
     );
+
+    
   }
 
-  Padding buildDivider(DateTime currentIterationDate, List<Salida> cardOnDay) {
+
+
+
+  Padding buildDivider(DateTime currentIterationDate, List<HistoryRideItem> cardOnDay) {
 
 
 
@@ -152,7 +157,7 @@ class HistoryListScreen extends StatelessWidget {
           );
   }
 
-  Text calculateDistance(List<Salida> cardOnDay){
+  Text calculateDistance(List<HistoryRideItem> cardOnDay){
 
       int acumulatedDistance = cardOnDay
       .map((value) => int.parse(value.distancia))
@@ -161,7 +166,7 @@ class HistoryListScreen extends StatelessWidget {
       return Text("$acumulatedDistance Km");
   }
 
-  Column CardContent(String hora, Salida salida) {
+  Column CardContent(String hora, HistoryRideItem salida) {
     return Column(
           children: [
             Row(

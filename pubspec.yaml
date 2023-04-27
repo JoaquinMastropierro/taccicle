@@ -35,13 +35,18 @@ dependencies:
   shared_preferences: ^2.0.18
   cupertino_icons: ^1.0.2
   dio: ^5.0.3
-  syncfusion_flutter_charts: ^21.1.35
+  syncfusion_flutter_charts: ^21.1.39
   crypto: ^3.0.2
   blur: ^3.0.0
   fa_stepper: ^0.0.2
   file_picker: ^5.2.6
   geolocator: ^9.0.2
   permission_handler: ^10.2.0
+  google_maps_flutter: ^2.2.5
+  flutter_bloc: ^8.1.2
+  equatable: ^2.0.5
+  syncfusion_flutter_gauges: ^21.1.41
+  sqflite: ^2.2.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

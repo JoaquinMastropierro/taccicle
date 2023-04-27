@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taccicle/presentation/providers/form_provider/register_form_provider.dart';
+import 'package:taccicle/presentation/states/providers/form_provider/register_form_provider.dart';
 import 'package:taccicle/presentation/ui/common/custom_image_picker.dart';
 
 class RegisterSecondStep extends StatelessWidget {

@@ -20,14 +20,15 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future checkAuth(context) async {
+  Future<User?> checkAuth() async {
     
     User? user = await authUserCases.checkCurrentToken();
 
-    if(user == null) return;
+    if(user == null) return null;
     
     setUser(user);
   
+    return user;
   }
 
   logoutUser(){

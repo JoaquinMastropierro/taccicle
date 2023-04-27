@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Salida {
+class HistoryRideItem {
 
   final String distancia;
   final String duracion;
@@ -9,5 +9,6 @@ class Salida {
   final String creador;
   late Color? colorSalida;
   late Color? colorSalidaAscent; 
-  Salida(this.distancia, this.duracion, this.HoraInicio, this.participantes, this.creador, this.colorSalida, this.colorSalidaAscent);
+  HistoryRideItem(this.distancia, this.duracion, this.HoraInicio, this.participantes, this.creador, this.colorSalida, this.colorSalidaAscent);
+  
 }

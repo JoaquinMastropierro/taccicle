@@ -14,13 +14,12 @@ class WarningCard extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var theme = Theme.of(context);
-    var colorScheme = theme.colorScheme;
 
 
     return InkWell(
       onTap: action,
       child: Ink(
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
         decoration: BoxDecoration(
           color: Colors.deepOrange,
           borderRadius: BorderRadius.circular(15),
@@ -30,11 +29,11 @@ class WarningCard extends StatelessWidget {
           ],
         ),
         height: 65,
-        child:  Text(
+        child: Text(
             text,
             textAlign: TextAlign.center,
             style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w600,)
+                color: Colors.white, fontWeight: FontWeight.w600)
         ),
       ),
     );

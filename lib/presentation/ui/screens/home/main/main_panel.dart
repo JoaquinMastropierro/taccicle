@@ -2,12 +2,20 @@ import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:taccicle/presentation/providers/location_provider.dart';
+import 'package:taccicle/presentation/states/providers/location_provider.dart';
 import 'package:taccicle/presentation/ui/common/notification_container.dart';
 import 'package:taccicle/presentation/ui/common/warning_card.dart';
 
-class MainPanel extends StatelessWidget {
+class MainPanel extends StatefulWidget {
   @override
+  State<MainPanel> createState() => _MainPanelState();
+}
+
+class _MainPanelState extends State<MainPanel>  {
+  
+
+  
+  @override 
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var colorScheme = theme.colorScheme;
@@ -31,7 +39,8 @@ class MainPanel extends StatelessWidget {
               decoration: flexibleCardDecoration(context),
               height: height,
               width: width,
-              child: child),
+              child: child
+          ),
         ),
       );
     }
@@ -45,54 +54,57 @@ class MainPanel extends StatelessWidget {
       );
     }
 
-    Row firtRow() {
+    Widget firtRow() {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          flexibleCard(
-              160,
-              400,
-              flexCardContent(
-                  Icon(
-                    Icons.directions_bike,
-                    color: Colors.red.withOpacity(0.7),
-                    size: 60,
-                  ),
-                  "25 Km",
-                  "Distancia total recorrida")),
-          const SizedBox(
-            width: 10,
-          ),
-          flexibleCard(
-              160,
-              400,
-              flexCardContent(
-                  Icon(
-                    Icons.speed,
-                    color: Colors.green.withOpacity(0.55),
-                    size: 60,
-                  ),
-                  "14 Km/h",
-                  "Velocidad promedio")),
-        ],
-      );
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              flexibleCard(
+                  160,
+                  400,
+                  flexCardContent(
+                      Icon(
+                        Icons.directions_bike,
+                        color: Colors.red.withOpacity(0.7),
+                        size: 60,
+                      ),
+                      "25 Km",
+                      "Distancia total recorrida")),
+              const SizedBox(
+                width: 10,
+              ),
+              flexibleCard(
+                  160,
+                  400,
+                  flexCardContent(
+                      Icon(
+                        Icons.speed,
+                        color: Colors.green.withOpacity(0.55),
+                        size: 60,
+                      ),
+                      "14 Km/h",
+                      "Velocidad promedio")),
+            ],
+          );
     }
 
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 25, horizontal: 10),
       child: ListView(
-        children: [
-          
-          NotificationContainer(),
+    
+        children:  [
         
-          firtRow(),
-          const SizedBox(
-            height: 15,
-          ),
-          secondRow(),
-          const SizedBox(height: 25),
-          firtRow(),
-        ],
+        const NotificationContainer(),
+      
+        firtRow(),
+        const SizedBox(
+          height: 15,
+        ),
+        secondRow(),
+        const SizedBox(height: 25),
+        firtRow(),
+      ],
+      
+     
       ),
     );
   }

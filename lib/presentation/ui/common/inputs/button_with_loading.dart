@@ -47,10 +47,11 @@ class _ButtonWithLoadingState extends State<ButtonWithLoading> {
           setState(() {
             isLoading = true;
           });
-          
-           await widget.onPress();
+          FocusScope.of(context).requestFocus(FocusNode());
 
-           setState(() {
+          await widget.onPress();
+
+          setState(() {
             isLoading = false;
           });
           },

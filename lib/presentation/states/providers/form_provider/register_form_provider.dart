@@ -4,7 +4,7 @@ import 'package:taccicle/domain/entities/User.dart';
 import 'package:taccicle/domain/excepcions/existent_user.dart';
 import 'package:taccicle/domain/excepcions/invalid_user.dart';
 import 'package:taccicle/domain/user_cases/auth_user_cases.dart';
-import 'package:taccicle/presentation/providers/auth_provider.dart';
+import 'package:taccicle/presentation/states/providers/auth_provider.dart';
 import 'package:taccicle/presentation/services/toast_service.dart';
 
 class RegisterFormProvider extends ChangeNotifier {

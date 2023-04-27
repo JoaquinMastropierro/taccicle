@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
-import 'package:taccicle/presentation/providers/location_provider.dart';
+import 'package:taccicle/presentation/states/providers/location_provider.dart';
 import 'package:taccicle/presentation/ui/common/warning_card.dart';
 
 class NotificationContainer extends StatelessWidget {

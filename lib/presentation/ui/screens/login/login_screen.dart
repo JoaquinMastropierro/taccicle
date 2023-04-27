@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taccicle/domain/entities/User.dart';
-import 'package:taccicle/presentation/providers/auth_provider.dart';
-import 'package:taccicle/presentation/providers/form_provider/login_form_provider.dart';
+import 'package:taccicle/presentation/states/providers/auth_provider.dart';
+import 'package:taccicle/presentation/states/providers/form_provider/login_form_provider.dart';
 import 'package:taccicle/presentation/ui/common/inputs/button_with_loading.dart';
 import 'package:taccicle/presentation/ui/common/inputs/custom_shadow_input.dart';
 import 'package:taccicle/presentation/ui/screens/register/register_screen.dart';

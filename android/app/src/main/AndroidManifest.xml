@@ -9,6 +9,10 @@
         android:label="taccicle"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDYA7_qb0OyOA8-zx2v9Oz98Dy9Wg0YGfg"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

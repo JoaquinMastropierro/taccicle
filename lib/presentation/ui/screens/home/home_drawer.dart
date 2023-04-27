@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taccicle/domain/entities/User.dart';
 import 'package:taccicle/domain/user_cases/auth_user_cases.dart';
-import 'package:taccicle/presentation/providers/auth_provider.dart';
+import 'package:taccicle/presentation/states/providers/auth_provider.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
@@ -35,7 +35,7 @@ class HomeDrawer extends StatelessWidget {
                   fit: BoxFit.fill,
                   loadingBuilder: (context, child, loadingProgress) =>
                       loadingBuilder(context, child, loadingProgress),
-                )).blurred(blur: 5, colorOpacity: 0),
+                )).blurred(blur: 30, colorOpacity: 0),
                 Positioned(
                   bottom: 15,
                   right: 40,

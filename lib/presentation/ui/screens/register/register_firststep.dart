@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 import 'package:taccicle/domain/entities/User.dart';
-import 'package:taccicle/presentation/providers/form_provider/register_form_provider.dart';
+import 'package:taccicle/presentation/states/providers/form_provider/register_form_provider.dart';
 import 'package:taccicle/presentation/ui/common/inputs/custom_shadow_input.dart';
 
 class RegisterFirstStep extends StatelessWidget {
